@@ -1,0 +1,45 @@
+prices 1985-01-02 -> 2024-04-05  (9492 days)
+
+US stocks: 1793 weekly observations, 1989-10-12 -> 2024-03-20
+  [1] storage curve   spread = a + b*lvl_dev(%)   b=-0.0416  t=-8.61  R2=0.298  n=1793
+  [2] release day     d_spread = a + b*z          b=-0.0168  t=-2.88  R2=0.010  n=1480
+  [3] drift h=1  full fwd = a + b*z              b=-0.0061  t=-1.44  R2=0.0018  n=1531
+  [3] drift h=1  IS   fwd = a + b*z              b=-0.0112  t=-2.15  R2=0.0052  n=1164
+  [3] drift h=1  OOS  fwd = a + b*z              b=+0.0083  t=+1.46  R2=0.0063  n=367
+  [3] drift h=3  full fwd = a + b*z              b=-0.0043  t=-0.51  R2=0.0002  n=1340
+  [3] drift h=3  IS   fwd = a + b*z              b=-0.0054  t=-0.50  R2=0.0003  n=1015
+  [3] drift h=3  OOS  fwd = a + b*z              b=-0.0010  t=-0.08  R2=0.0000  n=325
+  [3] drift h=5  full fwd = a + b*z              b=-0.0088  t=-0.88  R2=0.0007  n=1147
+  [3] drift h=5  IS   fwd = a + b*z              b=-0.0096  t=-0.79  R2=0.0007  n=868
+  [3] drift h=5  OOS  fwd = a + b*z              b=-0.0075  t=-0.45  R2=0.0008  n=279
+  [3] drift h=10 full fwd = a + b*z              b=-0.0083  t=-0.50  R2=0.0004  n=717
+  [3] drift h=10 IS   fwd = a + b*z              b=-0.0130  t=-0.66  R2=0.0008  n=541
+  [3] drift h=10 OOS  fwd = a + b*z              b=+0.0002  t=+0.01  R2=0.0000  n=176
+  [4] backtest full gross: Sharpe=+0.16  mean=+0.0062$/bbl/wk  hit=52%  n=1793
+      backtest full net  : Sharpe=-0.10  mean=-0.0037$/bbl/wk  hit=45%  n=1793
+  [4] backtest IS  gross: Sharpe=+0.19  mean=+0.0076$/bbl/wk  hit=52%  n=1369
+      backtest IS  net  : Sharpe=-0.06  mean=-0.0022$/bbl/wk  hit=45%  n=1369
+  [4] backtest OOS gross: Sharpe=+0.06  mean=+0.0019$/bbl/wk  hit=49%  n=424
+      backtest OOS net  : Sharpe=-0.27  mean=-0.0085$/bbl/wk  hit=43%  n=424
+
+Cushing stocks: 670 weekly observations, 2011-04-20 -> 2024-03-20
+  [1] storage curve   spread = a + b*lvl_dev(%)   b=-0.0132  t=-7.33  R2=0.465  n=670
+  [2] release day     d_spread = a + b*z          b=-0.0078  t=-1.79  R2=0.007  n=556
+  [3] drift h=1  full fwd = a + b*z              b=+0.0077  t=+1.89  R2=0.0055  n=577
+  [3] drift h=1  IS   fwd = a + b*z              b=+0.0104  t=+1.34  R2=0.0120  n=210
+  [3] drift h=1  OOS  fwd = a + b*z              b=+0.0058  t=+1.39  R2=0.0028  n=367
+  [3] drift h=3  full fwd = a + b*z              b=+0.0063  t=+0.67  R2=0.0008  n=510
+  [3] drift h=3  IS   fwd = a + b*z              b=+0.0212  t=+1.22  R2=0.0126  n=185
+  [3] drift h=3  OOS  fwd = a + b*z              b=-0.0039  t=-0.40  R2=0.0003  n=325
+  [3] drift h=5  full fwd = a + b*z              b=+0.0136  t=+1.14  R2=0.0032  n=440
+  [3] drift h=5  IS   fwd = a + b*z              b=+0.0249  t=+1.15  R2=0.0241  n=161
+  [3] drift h=5  OOS  fwd = a + b*z              b=+0.0062  t=+0.47  R2=0.0005  n=279
+  [3] drift h=10 full fwd = a + b*z              b=+0.0165  t=+0.89  R2=0.0027  n=281
+  [3] drift h=10 IS   fwd = a + b*z              b=+0.0053  t=+0.17  R2=0.0007  n=105
+  [3] drift h=10 OOS  fwd = a + b*z              b=+0.0229  t=+0.98  R2=0.0036  n=176
+  [4] backtest full gross: Sharpe=-0.31  mean=-0.0081$/bbl/wk  hit=49%  n=670
+      backtest full net  : Sharpe=-0.69  mean=-0.0182$/bbl/wk  hit=42%  n=670
+  [4] backtest IS  gross: Sharpe=-0.59  mean=-0.0147$/bbl/wk  hit=48%  n=246
+      backtest IS  net  : Sharpe=-1.01  mean=-0.0254$/bbl/wk  hit=41%  n=246
+  [4] backtest OOS gross: Sharpe=-0.16  mean=-0.0043$/bbl/wk  hit=50%  n=424
+      backtest OOS net  : Sharpe=-0.52  mean=-0.0139$/bbl/wk  hit=43%  n=424
