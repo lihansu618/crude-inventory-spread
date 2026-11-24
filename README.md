@@ -4,6 +4,8 @@ Does the weekly EIA crude inventory number predict the WTI front calendar spread
 
 **Short answer: no.** Inventories explain the *level* of the spread very well (theory of storage holds), and the spread reacts on the release day, but there is no tradeable drift afterwards. A weekly strategy that fades inventory surprises loses money after costs.
 
+A follow-up test asks whether the spread reverts to its inventory-implied level. In the continuous C1 − C2 series it appears to, but **all of that reversion occurs in weeks that contain a contract roll**. A backtest that ignores this shows a Sharpe of +0.55; handled properly it is −0.10.
+
 ## Idea
 
 Theory of storage: when inventories are tight, prompt barrels carry a premium (backwardation, C1 > C2); when they are abundant, the curve moves into contango to pay for storage. If the market is slow to absorb a larger-than-normal build or draw, the spread should keep moving in the days after the report.
@@ -74,24 +76,57 @@ Nothing at 1, 3, 5 or 10 days in either series (full table in `results.txt`). Th
 
 The US gross P&L is dominated by a handful of weeks in the early-2009 super-contango; outside those it is flat.
 
+## Extension: reversion to the inventory-implied level
+
+`storage_curve_reversion.py`. Since the storage curve fits well, the natural trade is on the level: fit spread (as % of price) on the inventory deviation using past data only, and fade the residual. The benchmark is the same trade without inventories (spread minus its own trailing mean). Four curve specifications (linear or quadratic, expanding or rolling 5-year window) were fixed in advance and all are in `results_reversion.txt`; the numbers below are quadratic, rolling, and the others agree.
+
+**No reversion within a contract pair.** 5-day spread change on the residual z-score, roll windows dropped:
+
+| Stocks | Slope | t | n |
+|---|---|---|---|
+| US | +0.024 | +0.5 | 1,046 |
+| Cushing | −0.001 | −0.0 | 339 |
+
+At 10 days the US slope is positive (t = +2.2), i.e. deviations extend. That comes from two episodes, late 2008 and March 2020, when storage filled and contango kept widening; outside them it is +0.05 (t = +1.0). The inventory residual does not beat the own-mean benchmark in any specification.
+
+**The reversion in the continuous series is a roll effect.** Week-to-week change in the continuous C1 − C2 level on the residual z-score, crises excluded:
+
+| Stocks | Weeks | Slope | t | n |
+|---|---|---|---|---|
+| US | no roll | +0.000 | +0.0 | 980 |
+| US | roll | −0.303 | −5.2 | 558 |
+| Cushing | no roll | −0.038 | −1.7 | 307 |
+| Cushing | roll | −0.083 | −1.5 | 160 |
+
+![Reversion backtest](fig_reversion.png)
+
+| US stocks, gross Sharpe | Full | Pre-2016 | 2016– |
+|---|---|---|---|
+| Naive (rolls counted as P&L) | +0.55 | +0.70 | −0.00 |
+| Roll weeks flat | −0.10 | −0.20 | +0.41 |
+
+A dislocated front spread is replaced by the next, less dislocated contract pair rather than converging. With only C1 and C2 I cannot tell how much of the roll-week move is the mechanical contract switch and how much is genuine convergence in the last days before expiry; that needs contract-level prices.
+
 ## Limitations
 
 - The surprise is measured against a seasonal norm, not the analyst consensus or the API number published the evening before. The market's true surprise is smaller and different.
 - Revised inventory data are used, not first-print vintages.
 - Daily closes only: any reaction within minutes of 10:30 ET is invisible here.
 - Expiry dates come from the contract rule and a US holiday calendar, with a one-day safety margin.
+- Roll windows are dropped rather than traded, so any real P&L in the days before expiry is not measured.
 
 ## Next steps
 
+- Contract-level prices (or C3/C4) to build a roll-adjusted spread P&L and separate pre-expiry convergence from the contract switch.
 - Use consensus forecasts to build a true surprise.
-- Trade the level, not the change: the storage curve fits well, so test whether deviations of the spread from the curve-implied value mean-revert.
 - Product inventories against crack spreads (gasoline, distillate), where fewer participants watch the numbers.
-- Condition on regime: surprises may matter more when Cushing is near tank bottoms or tank tops, where the curve is steepest.
+- Condition on regime: the 2008 and 2020 episodes suggest that near tank tops the right trade is with the dislocation, not against it.
 
 ## Run
 
 ```
 pip install pandas statsmodels xlrd matplotlib
-python inventory_surprise.py             # real data
+python inventory_surprise.py             # downloads data, runs the surprise tests
 python inventory_surprise.py --selftest  # synthetic data with a planted effect
+python storage_curve_reversion.py        # extension, uses ./data
 ```

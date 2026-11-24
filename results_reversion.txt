@@ -1,0 +1,117 @@
+prices 1985-01-02 -> 2024-04-05;  fwd and P&L in % of C2 price; z_inv/z_own correlation shown per variant
+
+US stocks | quad curve, rolling window | 1992-09-23 -> 2024-03-13 | corr(z_inv, z_own)=0.71
+    h=5  full n=1046 inv: b=+0.024 t=+0.54 R2=0.002 | own: b=+0.022 t=+0.63 R2=0.002 | joint t: inv=+0.30 own=+0.66
+    h=5  IS   n=767  inv: b=+0.033 t=+0.56 R2=0.002 | own: b=+0.032 t=+0.76 R2=0.004 | joint t: inv=+0.16 own=+0.97
+    h=5  OOS  n=279  inv: b=+0.000 t=+0.01 R2=0.000 | own: b=-0.021 t=-0.40 R2=0.004 | joint t: inv=+0.55 own=-1.50
+    h=10 full n=653  inv: b=+0.207 t=+2.16 R2=0.062 | own: b=+0.151 t=+2.02 R2=0.048 | joint t: inv=+1.69 own=+1.30
+    h=10 IS   n=477  inv: b=+0.151 t=+1.61 R2=0.026 | own: b=+0.125 t=+1.78 R2=0.029 | joint t: inv=+0.91 own=+1.49
+    h=10 OOS  n=176  inv: b=+0.325 t=+2.17 R2=0.383 | own: b=+0.256 t=+1.34 R2=0.231 | joint t: inv=+2.43 own=+0.58
+    h=5  ex crises n=980  inv: b=+0.015 t=+0.53 R2=0.001
+    h=10 ex crises n=609  inv: b=+0.046 t=+1.04 R2=0.004
+    continuous-series change, no roll in week n=980  b=+0.000 t=+0.00 R2=0.000
+    continuous-series change, roll in week    n=558  b=-0.303 t=-5.22 R2=0.146
+    NAIVE backtest on the continuous series (rolls treated as P&L): gross Sharpe +0.55  IS +0.70  OOS -0.00
+    backtest inv: Sharpe gross/net  full -0.10/-0.30  IS -0.20/-0.41  OOS +0.41/+0.24  | net ex 10 largest weeks -0.35
+    backtest own: Sharpe gross/net  full -0.15/-0.35  IS -0.30/-0.52  OOS +0.59/+0.42  | net ex 10 largest weeks -0.50
+
+US stocks | quad curve, expanding window | 1992-09-23 -> 2024-03-13 | corr(z_inv, z_own)=0.64
+    h=5  full n=1046 inv: b=+0.031 t=+0.71 R2=0.003 | own: b=+0.029 t=+0.61 R2=0.002 | joint t: inv=+0.79 own=+0.44
+    h=5  IS   n=767  inv: b=+0.032 t=+0.59 R2=0.002 | own: b=+0.046 t=+0.73 R2=0.005 | joint t: inv=+0.18 own=+0.84
+    h=5  OOS  n=279  inv: b=+0.026 t=+0.51 R2=0.005 | own: b=-0.019 t=-0.33 R2=0.003 | joint t: inv=+1.11 own=-1.43
+    h=10 full n=653  inv: b=+0.212 t=+2.31 R2=0.067 | own: b=+0.204 t=+2.13 R2=0.063 | joint t: inv=+2.33 own=+1.86
+    h=10 IS   n=477  inv: b=+0.156 t=+1.76 R2=0.030 | own: b=+0.180 t=+1.77 R2=0.039 | joint t: inv=+1.46 own=+1.58
+    h=10 OOS  n=176  inv: b=+0.348 t=+2.39 R2=0.415 | own: b=+0.281 t=+1.49 R2=0.270 | joint t: inv=+3.15 own=+1.22
+    h=5  ex crises n=980  inv: b=+0.020 t=+0.68 R2=0.002
+    h=10 ex crises n=609  inv: b=+0.068 t=+1.38 R2=0.009
+    continuous-series change, no roll in week n=980  b=+0.008 t=+0.32 R2=0.000
+    continuous-series change, roll in week    n=558  b=-0.288 t=-5.45 R2=0.156
+    NAIVE backtest on the continuous series (rolls treated as P&L): gross Sharpe +0.62  IS +0.78  OOS -0.01
+    backtest inv: Sharpe gross/net  full -0.13/-0.33  IS -0.21/-0.43  OOS +0.29/+0.10  | net ex 10 largest weeks -0.50
+    backtest own: Sharpe gross/net  full -0.16/-0.36  IS -0.29/-0.51  OOS +0.49/+0.35  | net ex 10 largest weeks -0.50
+
+US stocks | linear curve, rolling window | 1992-09-23 -> 2024-03-13 | corr(z_inv, z_own)=0.72
+    h=5  full n=1046 inv: b=+0.026 t=+0.62 R2=0.002 | own: b=+0.022 t=+0.63 R2=0.002 | joint t: inv=+0.49 own=+0.50
+    h=5  IS   n=767  inv: b=+0.031 t=+0.58 R2=0.002 | own: b=+0.032 t=+0.76 R2=0.004 | joint t: inv=+0.16 own=+0.98
+    h=5  OOS  n=279  inv: b=+0.011 t=+0.22 R2=0.001 | own: b=-0.021 t=-0.40 R2=0.004 | joint t: inv=+1.03 own=-2.11
+    h=10 full n=653  inv: b=+0.191 t=+2.10 R2=0.059 | own: b=+0.151 t=+2.02 R2=0.048 | joint t: inv=+1.57 own=+1.31
+    h=10 IS   n=477  inv: b=+0.133 t=+1.51 R2=0.023 | own: b=+0.125 t=+1.78 R2=0.029 | joint t: inv=+0.67 own=+1.61
+    h=10 OOS  n=176  inv: b=+0.321 t=+2.31 R2=0.403 | own: b=+0.256 t=+1.34 R2=0.231 | joint t: inv=+2.72 own=-0.00
+    h=5  ex crises n=980  inv: b=+0.015 t=+0.54 R2=0.001
+    h=10 ex crises n=609  inv: b=+0.040 t=+0.90 R2=0.003
+    continuous-series change, no roll in week n=980  b=+0.000 t=+0.01 R2=0.000
+    continuous-series change, roll in week    n=558  b=-0.279 t=-5.05 R2=0.143
+    NAIVE backtest on the continuous series (rolls treated as P&L): gross Sharpe +0.60  IS +0.76  OOS -0.02
+    backtest inv: Sharpe gross/net  full -0.06/-0.27  IS -0.15/-0.36  OOS +0.36/+0.20  | net ex 10 largest weeks -0.37
+    backtest own: Sharpe gross/net  full -0.15/-0.35  IS -0.30/-0.52  OOS +0.59/+0.42  | net ex 10 largest weeks -0.50
+
+US stocks | linear curve, expanding window | 1992-09-23 -> 2024-03-13 | corr(z_inv, z_own)=0.50
+    h=5  full n=1046 inv: b=+0.026 t=+0.71 R2=0.002 | own: b=+0.029 t=+0.61 R2=0.002 | joint t: inv=+0.78 own=+0.52
+    h=5  IS   n=767  inv: b=+0.028 t=+0.58 R2=0.002 | own: b=+0.046 t=+0.73 R2=0.005 | joint t: inv=+0.35 own=+0.79
+    h=5  OOS  n=279  inv: b=+0.020 t=+0.52 R2=0.004 | own: b=-0.019 t=-0.33 R2=0.003 | joint t: inv=+0.93 own=-0.92
+    h=10 full n=653  inv: b=+0.178 t=+2.12 R2=0.057 | own: b=+0.204 t=+2.13 R2=0.063 | joint t: inv=+2.20 own=+2.14
+    h=10 IS   n=477  inv: b=+0.133 t=+1.66 R2=0.024 | own: b=+0.180 t=+1.77 R2=0.039 | joint t: inv=+1.51 own=+1.73
+    h=10 OOS  n=176  inv: b=+0.277 t=+1.96 R2=0.347 | own: b=+0.281 t=+1.49 R2=0.270 | joint t: inv=+2.69 own=+1.68
+    h=5  ex crises n=980  inv: b=+0.016 t=+0.68 R2=0.001
+    h=10 ex crises n=609  inv: b=+0.046 t=+1.16 R2=0.005
+    continuous-series change, no roll in week n=980  b=+0.007 t=+0.36 R2=0.000
+    continuous-series change, roll in week    n=558  b=-0.250 t=-4.96 R2=0.134
+    NAIVE backtest on the continuous series (rolls treated as P&L): gross Sharpe +0.63  IS +0.79  OOS +0.02
+    backtest inv: Sharpe gross/net  full -0.09/-0.30  IS -0.17/-0.39  OOS +0.36/+0.14  | net ex 10 largest weeks -0.45
+    backtest own: Sharpe gross/net  full -0.16/-0.36  IS -0.29/-0.51  OOS +0.49/+0.35  | net ex 10 largest weeks -0.50
+
+Cushing stocks | quad curve, rolling window | 2014-04-02 -> 2024-03-13 | corr(z_inv, z_own)=0.74
+    h=5  full n=339  inv: b=-0.001 t=-0.02 R2=0.000 | own: b=-0.015 t=-0.45 R2=0.003 | joint t: inv=+0.66 own=-1.87
+    h=5  IS   n=60   inv: b=-0.014 t=-0.44 R2=0.002 | own: b=-0.004 t=-0.27 R2=0.001 | joint t: inv=-0.37 own=+0.07
+    h=5  OOS  n=279  inv: b=+0.001 t=+0.02 R2=0.000 | own: b=-0.021 t=-0.40 R2=0.004 | joint t: inv=+1.19 own=-2.39
+    h=10 full n=216  inv: b=+0.230 t=+1.43 R2=0.241 | own: b=+0.179 t=+1.15 R2=0.154 | joint t: inv=+1.60 own=-0.10
+    h=10 OOS  n=176  inv: b=+0.286 t=+1.69 R2=0.325 | own: b=+0.256 t=+1.34 R2=0.231 | joint t: inv=+2.08 own=-0.58
+    h=5  ex crises n=307  inv: b=-0.040 t=-1.56 R2=0.021
+    h=10 ex crises n=195  inv: b=-0.026 t=-0.50 R2=0.006
+    continuous-series change, no roll in week n=307  b=-0.038 t=-1.67 R2=0.019
+    continuous-series change, roll in week    n=160  b=-0.083 t=-1.49 R2=0.027
+    NAIVE backtest on the continuous series (rolls treated as P&L): gross Sharpe +0.02  IS +0.67  OOS -0.06
+    backtest inv: Sharpe gross/net  full +0.29/+0.11  IS -0.29/-0.83  OOS +0.36/+0.22  | net ex 10 largest weeks -0.35
+    backtest own: Sharpe gross/net  full +0.51/+0.31  IS -0.01/-0.54  OOS +0.59/+0.42  | net ex 10 largest weeks +0.34
+
+Cushing stocks | quad curve, expanding window | 2014-04-02 -> 2024-03-13 | corr(z_inv, z_own)=0.74
+    h=5  full n=339  inv: b=+0.002 t=+0.06 R2=0.000 | own: b=-0.017 t=-0.49 R2=0.003 | joint t: inv=+0.81 own=-1.85
+    h=5  IS   n=60   inv: b=-0.012 t=-0.38 R2=0.002 | own: b=-0.005 t=-0.30 R2=0.001 | joint t: inv=-0.27 own=-0.08
+    h=5  OOS  n=279  inv: b=+0.005 t=+0.10 R2=0.000 | own: b=-0.024 t=-0.44 R2=0.004 | joint t: inv=+1.39 own=-2.21
+    h=10 full n=216  inv: b=+0.239 t=+1.54 R2=0.269 | own: b=+0.182 t=+1.15 R2=0.156 | joint t: inv=+1.70 own=-0.58
+    h=10 OOS  n=176  inv: b=+0.286 t=+1.82 R2=0.348 | own: b=+0.262 t=+1.34 R2=0.237 | joint t: inv=+2.31 own=-1.62
+    h=5  ex crises n=307  inv: b=-0.042 t=-1.57 R2=0.022
+    h=10 ex crises n=195  inv: b=-0.031 t=-0.58 R2=0.007
+    continuous-series change, no roll in week n=307  b=-0.040 t=-1.69 R2=0.021
+    continuous-series change, roll in week    n=160  b=-0.093 t=-1.68 R2=0.032
+    NAIVE backtest on the continuous series (rolls treated as P&L): gross Sharpe +0.05  IS +0.79  OOS -0.04
+    backtest inv: Sharpe gross/net  full +0.29/+0.12  IS -0.31/-0.86  OOS +0.36/+0.22  | net ex 10 largest weeks -0.36
+    backtest own: Sharpe gross/net  full +0.53/+0.32  IS +0.08/-0.44  OOS +0.59/+0.42  | net ex 10 largest weeks +0.38
+
+Cushing stocks | linear curve, rolling window | 2014-04-02 -> 2024-03-13 | corr(z_inv, z_own)=0.78
+    h=5  full n=339  inv: b=+0.005 t=+0.11 R2=0.000 | own: b=-0.015 t=-0.45 R2=0.003 | joint t: inv=+1.03 own=-2.17
+    h=5  IS   n=60   inv: b=-0.005 t=-0.17 R2=0.000 | own: b=-0.004 t=-0.27 R2=0.001 | joint t: inv=+0.06 own=-0.20
+    h=5  OOS  n=279  inv: b=+0.007 t=+0.14 R2=0.000 | own: b=-0.021 t=-0.40 R2=0.004 | joint t: inv=+1.42 own=-2.47
+    h=10 full n=216  inv: b=+0.242 t=+1.56 R2=0.269 | own: b=+0.179 t=+1.15 R2=0.154 | joint t: inv=+1.89 own=-1.30
+    h=10 OOS  n=176  inv: b=+0.300 t=+1.89 R2=0.356 | own: b=+0.256 t=+1.34 R2=0.231 | joint t: inv=+2.50 own=-1.43
+    h=5  ex crises n=307  inv: b=-0.037 t=-1.48 R2=0.017
+    h=10 ex crises n=195  inv: b=-0.020 t=-0.42 R2=0.003
+    continuous-series change, no roll in week n=307  b=-0.037 t=-1.61 R2=0.017
+    continuous-series change, roll in week    n=160  b=-0.097 t=-1.62 R2=0.038
+    NAIVE backtest on the continuous series (rolls treated as P&L): gross Sharpe +0.02  IS +0.63  OOS -0.05
+    backtest inv: Sharpe gross/net  full +0.29/+0.11  IS -0.31/-0.84  OOS +0.35/+0.21  | net ex 10 largest weeks -0.39
+    backtest own: Sharpe gross/net  full +0.51/+0.31  IS -0.01/-0.54  OOS +0.59/+0.42  | net ex 10 largest weeks +0.34
+
+Cushing stocks | linear curve, expanding window | 2014-04-02 -> 2024-03-13 | corr(z_inv, z_own)=0.81
+    h=5  full n=339  inv: b=+0.002 t=+0.04 R2=0.000 | own: b=-0.017 t=-0.49 R2=0.003 | joint t: inv=+0.91 own=-1.83
+    h=5  IS   n=60   inv: b=-0.005 t=-0.19 R2=0.000 | own: b=-0.005 t=-0.30 R2=0.001 | joint t: inv=+0.05 own=-0.21
+    h=5  OOS  n=279  inv: b=+0.003 t=+0.07 R2=0.000 | own: b=-0.024 t=-0.44 R2=0.004 | joint t: inv=+1.32 own=-2.09
+    h=10 full n=216  inv: b=+0.237 t=+1.52 R2=0.266 | own: b=+0.182 t=+1.15 R2=0.156 | joint t: inv=+1.72 own=-1.40
+    h=10 OOS  n=176  inv: b=+0.284 t=+1.77 R2=0.340 | own: b=+0.262 t=+1.34 R2=0.237 | joint t: inv=+2.14 own=-1.57
+    h=5  ex crises n=307  inv: b=-0.044 t=-1.62 R2=0.023
+    h=10 ex crises n=195  inv: b=-0.035 t=-0.69 R2=0.010
+    continuous-series change, no roll in week n=307  b=-0.042 t=-1.77 R2=0.022
+    continuous-series change, roll in week    n=160  b=-0.109 t=-1.78 R2=0.046
+    NAIVE backtest on the continuous series (rolls treated as P&L): gross Sharpe +0.05  IS +0.72  OOS -0.03
+    backtest inv: Sharpe gross/net  full +0.31/+0.14  IS -0.25/-0.78  OOS +0.38/+0.24  | net ex 10 largest weeks -0.30
+    backtest own: Sharpe gross/net  full +0.53/+0.32  IS +0.08/-0.44  OOS +0.59/+0.42  | net ex 10 largest weeks +0.38
